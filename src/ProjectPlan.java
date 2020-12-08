@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import functions.DisplayMenu;
+import functions.Functions;
 import models.Project;
 import models.Task;
 
@@ -9,58 +11,53 @@ public class ProjectPlan {
 
 	public static void main(String[] args) {
 		//Variable declaration
+		Functions functions = new Functions();
 		List<Project> projects = new ArrayList<Project>();
 		
 		int inputProjectMenu, inputProjectId, inputTask;
 		
-		Menu.displayInterface();
+		DisplayMenu.displayInterface();
 		
 		do {
-			inputProjectMenu = Menu.displayProjectPlanMenu();
+			inputProjectMenu = DisplayMenu.displayProjectPlanMenu();
 			
 			switch(inputProjectMenu) {
 				//Add project to list
-				case(1):					
+				case(1):	
+					//Create new project
 					Project project = new Project();
 					projects.add(project);
 				
 					break;
 				//View all projects
 				case(2):
-					System.out.println("Projects");
+					DisplayMenu.displayTitle("Projects");
 				
 					if(projects.size() != 0) {
 						
 						do {
 							//List all existing projects
-							System.out.println("id | Project Name");
-							for(Project p : projects) {
-								System.out.println(p.getId() + "  | " + p.getProjectName());
-							}
+							functions.listAllProjects(projects);
 							
-							//Project menu
-							inputProjectId = Menu.displayProjectMenu();
+							//Displays project menu and return user choice
+							inputProjectId = DisplayMenu.displayIdMenu();
 							
-							//try {
 							if(inputProjectId > 0 && projects.get(inputProjectId - 1) != null) {
-								System.out.println("******************************************");
-								System.out.println("PROJECT " + projects.get(inputProjectId - 1).getProjectName());
+								DisplayMenu.displayTitle("PROJECT " + projects.get(inputProjectId - 1).getProjectName());
 								
 								do {	
-									inputTask = Menu.displayTaskMenu();
+									inputTask = DisplayMenu.displayTaskMenu();
 									
-									
+									//Displays task menu and return user choice
 									switch(inputTask) {
 										case 1:
-											if(projects.get(inputProjectId - 1).getTaskList() != null) {
-												for(Task task : projects.get(inputProjectId - 1).getTaskList()) {
-													System.out.println(task.getId() + "  | " + task.getTaskName());
-												}
-											} else {
-												System.out.println("No task available.");
+											if(inputProjectId > 0 && projects.get(inputProjectId - 1).getTaskList() != null) {
+												functions.listAllTasksByProject(projects.get(inputProjectId - 1).getTaskList());
 											}
+
 											break;
 										case 2:
+											//Create new task to the project
 											Task task = new Task();
 											projects.get(inputProjectId - 1).addProjectTask(task);
 									}
@@ -73,7 +70,7 @@ public class ProjectPlan {
 						
 						} while (inputProjectId != 0);
 					} else {
-						System.out.println("No existing project");
+						DisplayMenu.displayTitle("No existing project");
 					}
 					
 					break;

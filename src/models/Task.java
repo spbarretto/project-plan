@@ -1,6 +1,7 @@
 package models;
 
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -28,7 +29,7 @@ public class Task {
 		
 		id=idCounter++;
 	}
-	
+
 	//Setters and getters
 	public int getId() {
 		return id;
@@ -45,14 +46,14 @@ public class Task {
 	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void startTask() {
+		this.startDate = new Date();
 	}
 	public Date getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void endTask() {
+		this.endDate = new Date();
 	}
 	public List<Task> getTaskDependencies() {
 		return taskDependencies;

@@ -1,6 +1,8 @@
+package functions;
+
 import java.util.Scanner;
 
-public class Menu {
+public class DisplayMenu {
 	public static void displayInterface() {
 		System.out.println("******************************************");
 		System.out.println("**                                      **");
@@ -24,10 +26,10 @@ public class Menu {
 		return getUserInput();
 	}
 	
-	public static int displayProjectMenu() {	
+	public static int displayIdMenu() {	
 		System.out.println("");
 		System.out.println("******************************************");
-		System.out.println("Please enter the id of the project you want to update");
+		System.out.println("Please enter the id you want to update");
 		System.out.println("Enter '0' if you want to exit");
 	
 		return getUserInput();
@@ -42,6 +44,23 @@ public class Menu {
 		System.out.println("[0] Back");
 	
 		return getUserInput();
+	}
+	
+	public static int displayStartEndTaskMenu() {	
+		System.out.println("");
+		System.out.println("******************************************");
+		System.out.println("Please choose from the following options:");
+		System.out.println("[1] Start Task");
+		System.out.println("[2] End Task");
+		System.out.println("[0] Back");
+	
+		return getUserInput();
+	}
+	
+	public static void displayTitle(String title) {
+		System.out.println("******************************************");
+		System.out.println("");
+		System.out.println(title);
 	}
 	
 	public static int getUserInput() {
